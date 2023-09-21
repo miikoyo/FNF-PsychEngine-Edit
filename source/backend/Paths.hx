@@ -41,9 +41,9 @@ class Paths
 
 	public static var dumpExclusions:Array<String> =
 	[
-		'assets/music/freakyMenu.$SOUND_EXT',
-		'assets/shared/music/breakfast.$SOUND_EXT',
-		'assets/shared/music/tea-time.$SOUND_EXT',
+		'assets/audio/music/freakyMenu.$SOUND_EXT',
+		'assets/audio/music/breakfast.$SOUND_EXT',
+		'assets/audio/music/tea-time.$SOUND_EXT',
 	];
 	/// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory() {
@@ -165,7 +165,7 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
-		return getPath('data/$key.json', TEXT, library);
+		return getPath('charts/$key.json', TEXT, library);
 	}
 
 	inline static public function shaderFragment(key:String, ?library:String)
@@ -194,7 +194,7 @@ class Paths
 
 	static public function sound(key:String, ?library:String):Sound
 	{
-		var sound:Sound = returnSound('sounds', key, library);
+		var sound:Sound = returnSound('audio/sfx', key, library);
 		return sound;
 	}
 
@@ -205,17 +205,17 @@ class Paths
 
 	inline static public function music(key:String, ?library:String):Sound
 	{
-		var file:Sound = returnSound('music', key, library);
+		var file:Sound = returnSound('audio/music', key, library);
 		return file;
 	}
 
 	inline static public function voices(song:String):Any
 	{
 		#if html5
-		return 'songs:assets/songs/${formatToSongPath(song)}/Voices.$SOUND_EXT';
+		return 'songs:assets/audio/music/songs${formatToSongPath(song)}/Voices.$SOUND_EXT';
 		#else
 		var songKey:String = '${formatToSongPath(song)}/Voices';
-		var voices = returnSound('songs', songKey);
+		var voices = returnSound('audio/music/songs', songKey);
 		return voices;
 		#end
 	}
@@ -223,10 +223,10 @@ class Paths
 	inline static public function inst(song:String):Any
 	{
 		#if html5
-		return 'songs:assets/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
+		return 'songs:assets/audio/music/songs/${formatToSongPath(song)}/Inst.$SOUND_EXT';
 		#else
 		var songKey:String = '${formatToSongPath(song)}/Inst';
-		var inst = returnSound('songs', songKey);
+		var inst = returnSound('audio/music/songs', songKey);
 		return inst;
 		#end
 	}
@@ -421,7 +421,7 @@ class Paths
 		#else
 		{
 			var folder:String = '';
-			if(path == 'songs') folder = 'songs:';
+			if(path == 'songs') folder = 'audio/music/songs:';
 
 			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(folder + getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 		}
@@ -440,7 +440,7 @@ class Paths
 	}
 
 	inline static public function modsJson(key:String) {
-		return modFolders('data/' + key + '.json');
+		return modFolders('charts/' + key + '.json');
 	}
 
 	inline static public function modsVideo(key:String) {

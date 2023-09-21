@@ -2622,7 +2622,7 @@ class ChartingState extends MusicBeatState
 	}
 
 	function loadHealthIconFromCharacter(char:String) {
-		var characterPath:String = 'characters/' + char + '.json';
+		var characterPath:String = 'characters/$char/' + char + '.json';
 		#if MODS_ALLOWED
 		var path:String = Paths.modFolders(characterPath);
 		if (!FileSystem.exists(path)) {
@@ -2634,9 +2634,9 @@ class ChartingState extends MusicBeatState
 		var path:String = Paths.getPreloadPath(characterPath);
 		if (!OpenFlAssets.exists(path))
 		#end
-		{
-			path = Paths.getPreloadPath('characters/' + Character.DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
-		}
+		{ 
+			path = Paths.getPreloadPath('characters/bf/' + Character.DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+		} // I might have broken this while restructing the file paths?? it seems fine idk
 
 		#if MODS_ALLOWED
 		var rawJson = File.getContent(path);
